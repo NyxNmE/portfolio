@@ -4,3 +4,11 @@ body {
        */
     font: 100%/1.5 system-ui;
   }
+
+  img {
+    width: 900px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 20px auto; /* Centers the image */
+    border-radius: 10px; /* Optional: Adds rounded corners */
+}
