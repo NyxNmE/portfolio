@@ -1,4 +1,3 @@
-
 console.log("IT'S ALIVE!");
 
 export function $$(selector, context = document) {
