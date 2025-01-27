@@ -1,15 +1,5 @@
-
-
-
-
-
-
-
-
-
-/*
 :root {
-    --color-accent: oklch(65% 50% 0); 
+    color-scheme: light dark;
 }
 
 body {
@@ -17,7 +7,8 @@ body {
     max-width: 100vw; 
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: Canvas;
+    color: CanvasText;
 }
 
 nav {
@@ -215,51 +206,4 @@ p.contact-info {
 
 .resume-container ul li {
   margin-bottom: 0.5em;
-}
-
-*/
-
-:root {
-    --color-accent: oklch(65% 50% 0); 
-    color-scheme: light dark;
-}
-
-body {
-    background-color: Canvas;
-    color: CanvasText;
-}
-
-nav {
-    background-color: Canvas;
-    border-bottom: 2px solid color-mix(in oklch, CanvasText, transparent 30%);
-}
-
-nav a {
-    color: CanvasText;
-}
-
-nav a:hover {
-    background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
-    color: CanvasText;
-}
-
-.projects article {
-    background-color: Canvas;
-    color: CanvasText;
-}
-
-.resume-container {
-    background-color: Canvas;
-    color: CanvasText;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-
-form {
-    background-color: Canvas;
-    color: CanvasText;
-}
-
-button {
-    background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
-    color: CanvasText;
 }
