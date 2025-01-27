@@ -38,3 +38,32 @@ for (let p of pages) {
 
   nav.append(a);
 }
+
+// Inject Dark Mode Switch
+document.body.insertAdjacentHTML(
+  'afterbegin',
+  `
+  <label class="color-scheme">
+    Theme:
+    <select id="theme-switcher">
+      <option value="light dark" selected>Automatic</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+  `
+);
+
+const themeSwitcher = document.getElementById("theme-switcher");
+
+themeSwitcher.addEventListener("change", (event) => {
+  document.documentElement.style.colorScheme = event.target.value;
+  localStorage.setItem("preferred-theme", event.target.value);
+});
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem("preferred-theme");
+if (savedTheme) {
+  themeSwitcher.value = savedTheme;
+  document.documentElement.style.colorScheme = savedTheme;
+}

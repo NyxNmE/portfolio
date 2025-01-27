@@ -201,19 +201,22 @@ p.contact-info {
   margin-bottom: 0.5em;
 }
 
-.resume-container section > article {
-  margin-bottom: 1em;
-  padding-left: 1em;
-  border-left: 4px solid var(--color-accent);
+/* Dark Mode Switch */
+.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: Canvas;
+    color: CanvasText;
+    padding: 0.5em;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
-.resume-container ul {
-  margin-left: 1.5em;
-  margin-bottom: 1em;
-  list-style-type: disc;
-  line-height: 1.4;
-}
-
-.resume-container ul li {
-  margin-bottom: 0.5em;
+.color-scheme select {
+    background-color: Canvas;
+    color: CanvasText;
+    border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+    padding: 0.25em;
+    font-size: inherit;
 }
