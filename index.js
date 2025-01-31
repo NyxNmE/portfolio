@@ -1,37 +1,24 @@
-import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
+import { fetchJSON, renderProjects, fetchGitHubData } from '../global.js';
 
 (async function () {
-  const projects = await fetchJSON('./lib/projects.json');
-
-  if (!projects || projects.length === 0) {
-    console.error("No projects found.");
-    return;
-  }
-
-  const latestProjects = projects.slice(0, 3);
-  const projectsContainer = document.querySelector('.projects');
-
-  if (projectsContainer) {
+  const projects = await fetchJSON('../lib/projects.json');
+  if (projects) {
+    const latestProjects = projects.slice(0, 3);
+    const projectsContainer = document.querySelector('.projects');
     renderProjects(latestProjects, projectsContainer, 'h2');
-  } else {
-    console.error("Projects container not found on home page.");
   }
 
-  const githubUsername = "NyxNmE"; 
-  const githubData = await fetchGithubData(githubUsername);
+  const githubData = await fetchGitHubData('NyxNmE'); 
+  const profileStats = document.querySelector('#profile-stats');
 
-  if (githubData) {
-    const githubContainer = document.querySelector('.github-profile');
-    if (githubContainer) {
-      githubContainer.innerHTML = `
-        <h2>GitHub Profile</h2>
-        <p><strong>Name:</strong> ${githubData.name || "N/A"}</p>
-        <p><strong>Username:</strong> ${githubData.login}</p>
-        <p><strong>Followers:</strong> ${githubData.followers}</p>
-        <p><strong>Following:</strong> ${githubData.following}</p>
-        <p><strong>Public Repos:</strong> ${githubData.public_repos}</p>
-        <img src="${githubData.avatar_url}" alt="GitHub Avatar" width="100">
-      `;
-    }
+  if (githubData && profileStats) {
+    profileStats.innerHTML = `
+      <dl>
+        <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
+        <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
+        <dt>Followers:</dt><dd>${githubData.followers}</dd>
+        <dt>Following:</dt><dd>${githubData.following}</dd>
+      </dl>
+    `;
   }
 })();
