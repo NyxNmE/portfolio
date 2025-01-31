@@ -7,3 +7,4 @@ import { fetchJSON, renderProjects } from '../global.js';
 
   renderProjects(projects, projectsContainer, 'h2');
 })();
+
