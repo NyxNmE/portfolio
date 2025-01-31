@@ -1,20 +1,18 @@
 import { fetchJSON, renderProjects } from '../global.js';
 
-async function loadProjects() {
-  const projectsContainer = document.querySelector('.projects');
-  const titleElement = document.querySelector('.projects-title');
+(async function () {
+  const projects = await fetchJSON('../lib/projects.json');
 
-  if (!projectsContainer || !titleElement) {
-    console.error("Projects container or title element not found!");
+  if (!projects || projects.length === 0) {
+    console.error("No projects found.");
     return;
   }
 
-  const projects = await fetchJSON('../lib/projects.json');
+  const projectsContainer = document.querySelector('.projects');
 
-  titleElement.textContent = `${projects.length} Projects`;
-
-  renderProjects(projects, projectsContainer, 'h2');
-}
-
-loadProjects();
-
+  if (projectsContainer) {
+    renderProjects(projects, projectsContainer, 'h2');
+  } else {
+    console.error("Projects container not found.");
+  }
+})();
