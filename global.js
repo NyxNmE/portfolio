@@ -39,6 +39,7 @@ for (let p of pages) {
   nav.append(a);
 }
 
+
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -60,11 +61,13 @@ themeSwitcher.addEventListener("change", (event) => {
   localStorage.setItem("preferred-theme", event.target.value);
 });
 
+
 const savedTheme = localStorage.getItem("preferred-theme");
 if (savedTheme) {
   themeSwitcher.value = savedTheme;
   document.documentElement.style.colorScheme = savedTheme;
 }
+
 
 export async function fetchJSON(url) {
   try {
@@ -79,25 +82,45 @@ export async function fetchJSON(url) {
   }
 }
 
+
+export function renderProjects(projects, containerElement, headingLevel = "h2") {
+  if (!containerElement) {
+    console.error("Container element is missing or invalid.");
+    return;
+  }
+
+  
+  if (!/^h[1-6]$/.test(headingLevel)) {
+    console.warn(`Invalid heading level "${headingLevel}". Defaulting to "h2".`);
+    headingLevel = "h2";
+  }
+
+  
+  containerElement.innerHTML = "";
+
+  
+  projects.forEach((project) => {
+    const article = document.createElement("article");
+
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${project.image}" alt="${project.title}">
+      <p>${project.description}</p>
+    `;
+
+    containerElement.appendChild(article);
+  });
+}
+
 async function loadProjects() {
   const projectsContainer = document.querySelector(".projects");
 
-  if (!projectsContainer) return; 
+  if (!projectsContainer) return;
 
   const projects = await fetchJSON("../lib/projects.json");
   if (!projects) return;
 
-  projectsContainer.innerHTML = ""; 
-
-  projects.forEach((project) => {
-    const article = document.createElement("article");
-    article.innerHTML = `
-      <h2>${project.title}</h2>
-      <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
-    `;
-    projectsContainer.appendChild(article);
-  });
+  renderProjects(projects, projectsContainer, "h2");
 }
 
 if (document.querySelector(".projects")) {
