@@ -39,7 +39,6 @@ for (let p of pages) {
   nav.append(a);
 }
 
-// Inject Dark Mode Switch
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -61,14 +60,12 @@ themeSwitcher.addEventListener("change", (event) => {
   localStorage.setItem("preferred-theme", event.target.value);
 });
 
-// Load saved theme preference
 const savedTheme = localStorage.getItem("preferred-theme");
 if (savedTheme) {
   themeSwitcher.value = savedTheme;
   document.documentElement.style.colorScheme = savedTheme;
 }
 
-// Fetch JSON Data
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
@@ -81,14 +78,13 @@ export async function fetchJSON(url) {
   }
 }
 
-// Render Projects Function
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {
     console.error("Container element is missing or invalid.");
     return;
   }
 
-  containerElement.innerHTML = ''; // Clear existing content
+  containerElement.innerHTML = '';
 
   if (!Array.isArray(projects) || projects.length === 0) {
     containerElement.innerHTML = `<p>No projects found.</p>`;
@@ -107,14 +103,12 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     containerElement.appendChild(article);
   });
 
-  // Update Project Count Display
   const projectTitleElement = document.querySelector('.projects-title');
   if (projectTitleElement) {
     projectTitleElement.textContent = `${projects.length} Projects`;
   }
 }
 
-// Fetch GitHub Data Function
 export async function fetchGitHubData(username) {
-  return fetchJSON(`https://api.github.com/users/NyxNmE`);
+  return fetchJSON(`https://api.github.com/users/${username}`);
 }

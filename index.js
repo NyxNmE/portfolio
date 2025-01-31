@@ -2,13 +2,18 @@ import { fetchJSON, renderProjects, fetchGitHubData } from '../global.js';
 
 (async function () {
   const projects = await fetchJSON('../lib/projects.json');
+  console.log("Fetched Projects for Index Page:", projects);
+
   if (projects) {
     const latestProjects = projects.slice(0, 3);
     const projectsContainer = document.querySelector('.projects');
     renderProjects(latestProjects, projectsContainer, 'h2');
   }
 
-  const githubData = await fetchGitHubData('NyxNmE'); 
+  const githubUsername = 'NyxNmE';
+  const githubData = await fetchGitHubData(githubUsername);
+  console.log("GitHub Data:", githubData);
+
   const profileStats = document.querySelector('#profile-stats');
 
   if (githubData && profileStats) {
