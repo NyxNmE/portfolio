@@ -39,7 +39,6 @@ for (let p of pages) {
   nav.append(a);
 }
 
-
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -61,68 +60,59 @@ themeSwitcher.addEventListener("change", (event) => {
   localStorage.setItem("preferred-theme", event.target.value);
 });
 
-
 const savedTheme = localStorage.getItem("preferred-theme");
 if (savedTheme) {
   themeSwitcher.value = savedTheme;
   document.documentElement.style.colorScheme = savedTheme;
 }
 
-
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching or parsing JSON data:", error);
+    return [];
   }
 }
 
-
 export function renderProjects(projects, containerElement, headingLevel = "h2") {
   if (!containerElement) {
-    console.error("Container element is missing or invalid.");
+    console.error("Invalid container element for rendering projects.");
     return;
-  }
-
-  
-  if (!/^h[1-6]$/.test(headingLevel)) {
-    console.warn(`Invalid heading level "${headingLevel}". Defaulting to "h2".`);
-    headingLevel = "h2";
   }
 
   
   containerElement.innerHTML = "";
 
-  
+  if (!Array.isArray(projects) || projects.length === 0) {
+    containerElement.innerHTML = "<p>No projects available.</p>";
+    return;
+  }
+
   projects.forEach((project) => {
     const article = document.createElement("article");
 
-    article.innerHTML = `
-      <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
-    `;
+    const heading = document.createElement(headingLevel);
+    heading.textContent = project.title;
+
+    const img = document.createElement("img");
+    img.src = project.image || "https://via.placeholder.com/150";
+    img.alt = project.title;
+
+    const description = document.createElement("p");
+    description.textContent = project.description;
+
+    article.appendChild(heading);
+    article.appendChild(img);
+    article.appendChild(description);
 
     containerElement.appendChild(article);
   });
-}
-
-async function loadProjects() {
-  const projectsContainer = document.querySelector(".projects");
-
-  if (!projectsContainer) return;
-
-  const projects = await fetchJSON("../lib/projects.json");
-  if (!projects) return;
-
-  renderProjects(projects, projectsContainer, "h2");
-}
-
-if (document.querySelector(".projects")) {
-  loadProjects();
 }
