@@ -11,7 +11,7 @@ async function loadProjects() {
 
   const projects = await fetchJSON('../lib/projects.json');
 
-  titleElement.textContent = `Projects (${projects.length})`;
+  titleElement.textContent = `${projects.length} Projects`;
 
   renderProjects(projects, projectsContainer, 'h2');
 }
