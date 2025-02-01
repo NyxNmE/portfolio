@@ -1,40 +1,38 @@
 console.log("IT'S ALIVE!");
 
+
 export function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const ARE_WE_HOME = location.pathname.endsWith("index.html") || location.pathname === "/";
 
 const pages = [
-  { url: ARE_WE_HOME ? "index.html" : "../index.html", title: "Home" },
-  { url: ARE_WE_HOME ? "projects/index.html" : "../projects/index.html", title: "Projects" },
-  { url: ARE_WE_HOME ? "contact/index.html" : "../contact/index.html", title: "Contact" },
-  { url: ARE_WE_HOME ? "resume/index.html" : "../resume/index.html", title: "Resume" },
+  { url: "/portfolio/index.html", title: "Home" },
+  { url: "/portfolio/projects/index.html", title: "Projects" },
+  { url: "/portfolio/contact/index.html", title: "Contact" },
+  { url: "/portfolio/resume/index.html", title: "Resume" },
   { url: "https://github.com/NyxNmE", title: "GitHub" }
 ];
 
 const nav = document.createElement("nav");
-const navLinks = document.createElement("div");
-navLinks.classList.add("nav-links");
+document.body.prepend(nav);
 
-pages.forEach((page) => {
+pages.forEach(page => {
   const a = document.createElement("a");
   a.href = page.url;
   a.textContent = page.title;
-  
+
   if (page.url.startsWith("http")) {
     a.target = "_blank";
   }
-  
-  if (location.pathname.includes(page.url.replace("index.html", ""))) {
+
+  if (window.location.pathname === page.url) {
     a.classList.add("current");
   }
-  
-  navLinks.appendChild(a);
+
+  nav.appendChild(a);
 });
 
-nav.appendChild(navLinks);
 
 const themeLabel = document.createElement("label");
 themeLabel.classList.add("color-scheme");
@@ -46,10 +44,7 @@ themeLabel.innerHTML = `
     <option value="dark">Dark</option>
   </select>
 `;
-
 nav.appendChild(themeLabel);
-
-document.body.prepend(nav);
 
 const themeSwitcher = document.getElementById("theme-switcher");
 themeSwitcher.addEventListener("change", (event) => {
@@ -62,6 +57,7 @@ if (savedTheme) {
   themeSwitcher.value = savedTheme;
   document.documentElement.style.colorScheme = savedTheme;
 }
+
 
 export async function fetchJSON(url) {
   try {
@@ -76,6 +72,7 @@ export async function fetchJSON(url) {
   }
 }
 
+
 export async function fetchGithubData(username) {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`);
@@ -89,11 +86,13 @@ export async function fetchGithubData(username) {
   }
 }
 
+
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {
     console.error("Container element is missing or invalid.");
     return;
   }
+
   containerElement.innerHTML = '';
 
   if (!Array.isArray(projects) || projects.length === 0) {
