@@ -72,10 +72,23 @@ export async function fetchJSON(url) {
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error fetching or parsing JSON data:", error);
+    return [];
+  }
+}
+
+export async function fetchGithubData(username) {
+  try {
+    const response = await fetch(`https://api.github.com/users/NyxNmE`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch GitHub data: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching GitHub API data:", error);
+    return null;
   }
 }
 
@@ -85,7 +98,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     return;
   }
 
-  containerElement.innerHTML = ''; // Clear existing content
+  containerElement.innerHTML = ''; 
 
   if (!Array.isArray(projects) || projects.length === 0) {
     containerElement.innerHTML = `<p>No projects found.</p>`;
