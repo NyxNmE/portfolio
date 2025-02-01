@@ -3,18 +3,17 @@ import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
 (async function () {
   const projects = await fetchJSON('./lib/projects.json');
 
-  if (!projects || projects.length === 0) {
-    console.error("No projects found.");
-    return;
-  }
+  if (projects.length > 0) {
+    const latestProjects = projects.slice(0, 3);
+    const projectsContainer = document.querySelector('.projects');
 
-  const latestProjects = projects.slice(0, 3);
-  const projectsContainer = document.querySelector('.projects');
-
-  if (projectsContainer) {
-    renderProjects(latestProjects, projectsContainer, 'h2');
+    if (projectsContainer) {
+      renderProjects(latestProjects, projectsContainer, 'h2');
+    } else {
+      console.error("Projects container not found.");
+    }
   } else {
-    console.error("Projects container not found on home page.");
+    console.error("No projects found.");
   }
 
   const githubUsername = "NyxNmE"; 

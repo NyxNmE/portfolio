@@ -4,44 +4,36 @@ export function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const ARE_WE_HOME = document.documentElement.classList.contains("home");
+const ARE_WE_HOME = location.pathname.endsWith("index.html") || location.pathname === "/";
 
 const pages = [
-  { url: "",            title: "Home" },
-  { url: "projects/",   title: "Projects" },
-  { url: "contact/",    title: "Contact" },
-  { url: "resume/",     title: "Resume" },
+  { url: ARE_WE_HOME ? "index.html" : "../index.html", title: "Home" },
+  { url: ARE_WE_HOME ? "projects/index.html" : "../projects/index.html", title: "Projects" },
+  { url: ARE_WE_HOME ? "contact/index.html" : "../contact/index.html", title: "Contact" },
+  { url: ARE_WE_HOME ? "resume/index.html" : "../resume/index.html", title: "Resume" },
   { url: "https://github.com/NyxNmE", title: "GitHub" }
 ];
 
 const nav = document.createElement("nav");
 document.body.prepend(nav);
 
-for (let p of pages) {
+pages.forEach(p => {
   let a = document.createElement("a");
-
-  let finalURL = p.url;
-  if (!ARE_WE_HOME && !finalURL.startsWith("http")) {
-    finalURL = "../" + finalURL;
-  }
-
-  a.href = finalURL;
+  a.href = p.url;
   a.textContent = p.title;
 
-  if (a.host === location.host && a.pathname === location.pathname) {
+  if (location.pathname.includes(p.url.replace("index.html", ""))) {
     a.classList.add("current");
   }
 
-  if (a.host !== location.host) {
-    a.target = "_blank";
+  if (p.url.startsWith("http")) {
+    a.target = "_blank"; 
   }
 
-  nav.append(a);
-}
+  nav.appendChild(a);
+});
 
-document.body.insertAdjacentHTML(
-  'afterbegin',
-  `
+document.body.insertAdjacentHTML('beforeend', `
   <label class="color-scheme">
     Theme:
     <select id="theme-switcher">
@@ -50,11 +42,9 @@ document.body.insertAdjacentHTML(
       <option value="dark">Dark</option>
     </select>
   </label>
-  `
-);
+`);
 
 const themeSwitcher = document.getElementById("theme-switcher");
-
 themeSwitcher.addEventListener("change", (event) => {
   document.documentElement.style.colorScheme = event.target.value;
   localStorage.setItem("preferred-theme", event.target.value);
@@ -70,7 +60,7 @@ export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {
@@ -81,7 +71,7 @@ export async function fetchJSON(url) {
 
 export async function fetchGithubData(username) {
   try {
-    const response = await fetch(`https://api.github.com/users/NyxNmE`);
+    const response = await fetch(`https://api.github.com/users/${username}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch GitHub data: ${response.statusText}`);
     }
