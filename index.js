@@ -1,29 +1,20 @@
-import { fetchJSON, renderProjects, fetchGitHubData } from '../global.js';
+import { fetchJSON, renderProjects } from './global.js';
 
 (async function () {
-  const projects = await fetchJSON('../lib/projects.json');
-  console.log("Fetched Projects for Index Page:", projects);
+  const projects = await fetchJSON('./lib/projects.json');
 
-  if (projects) {
-    const latestProjects = projects.slice(0, 3);
-    const projectsContainer = document.querySelector('.projects');
-    renderProjects(latestProjects, projectsContainer, 'h2');
+  if (!projects || projects.length === 0) {
+    console.error("No projects found.");
+    return;
   }
 
-  const githubUsername = 'NyxNmE';
-  const githubData = await fetchGitHubData(githubUsername);
-  console.log("GitHub Data:", githubData);
+  const latestProjects = projects.slice(0, 3);
 
-  const profileStats = document.querySelector('#profile-stats');
+  const projectsContainer = document.querySelector('.projects');
 
-  if (githubData && profileStats) {
-    profileStats.innerHTML = `
-      <dl>
-        <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
-        <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
-        <dt>Followers:</dt><dd>${githubData.followers}</dd>
-        <dt>Following:</dt><dd>${githubData.following}</dd>
-      </dl>
-    `;
+  if (projectsContainer) {
+    renderProjects(latestProjects, projectsContainer, 'h2');
+  } else {
+    console.error("Projects container not found on home page.");
   }
 })();

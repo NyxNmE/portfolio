@@ -7,10 +7,10 @@ export function $$(selector, context = document) {
 const ARE_WE_HOME = document.documentElement.classList.contains("home");
 
 const pages = [
-  { url: "", title: "Home" },
-  { url: "projects/", title: "Projects" },
-  { url: "contact/", title: "Contact" },
-  { url: "resume/", title: "Resume" },
+  { url: "",            title: "Home" },
+  { url: "projects/",   title: "Projects" },
+  { url: "contact/",    title: "Contact" },
+  { url: "resume/",     title: "Resume" },
   { url: "https://github.com/NyxNmE", title: "GitHub" }
 ];
 
@@ -70,9 +70,10 @@ export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.statusText}`);
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching or parsing JSON data:", error);
   }
@@ -84,7 +85,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     return;
   }
 
-  containerElement.innerHTML = '';
+  containerElement.innerHTML = ''; // Clear existing content
 
   if (!Array.isArray(projects) || projects.length === 0) {
     containerElement.innerHTML = `<p>No projects found.</p>`;
@@ -107,8 +108,4 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   if (projectTitleElement) {
     projectTitleElement.textContent = `${projects.length} Projects`;
   }
-}
-
-export async function fetchGitHubData(username) {
-  return fetchJSON(`https://api.github.com/users/${username}`);
 }
