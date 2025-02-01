@@ -1,37 +1,38 @@
 console.log("IT'S ALIVE!");
 
+
 export function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const ARE_WE_HOME = location.pathname.endsWith("index.html") || location.pathname === "/";
 
 const pages = [
-  { url: ARE_WE_HOME ? "index.html" : "../index.html", title: "Home" },
-  { url: ARE_WE_HOME ? "projects/index.html" : "../projects/index.html", title: "Projects" },
-  { url: ARE_WE_HOME ? "contact/index.html" : "../contact/index.html", title: "Contact" },
-  { url: ARE_WE_HOME ? "resume/index.html" : "../resume/index.html", title: "Resume" },
+  { url: "/portfolio/index.html", title: "Home" },
+  { url: "/portfolio/projects/index.html", title: "Projects" },
+  { url: "/portfolio/contact/index.html", title: "Contact" },
+  { url: "/portfolio/resume/index.html", title: "Resume" },
   { url: "https://github.com/NyxNmE", title: "GitHub" }
 ];
 
 const nav = document.createElement("nav");
 document.body.prepend(nav);
 
-pages.forEach(p => {
-  let a = document.createElement("a");
-  a.href = p.url;
-  a.textContent = p.title;
+pages.forEach(page => {
+  const a = document.createElement("a");
+  a.href = page.url;
+  a.textContent = page.title;
 
-  if (location.pathname.includes(p.url.replace("index.html", ""))) {
-    a.classList.add("current");
+  if (page.url.startsWith("http")) {
+    a.target = "_blank";
   }
 
-  if (p.url.startsWith("http")) {
-    a.target = "_blank"; 
+  if (window.location.pathname === page.url) {
+    a.classList.add("current");
   }
 
   nav.appendChild(a);
 });
+
 
 const themeLabel = document.createElement("label");
 themeLabel.classList.add("color-scheme");
@@ -57,6 +58,7 @@ if (savedTheme) {
   document.documentElement.style.colorScheme = savedTheme;
 }
 
+
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
@@ -70,6 +72,7 @@ export async function fetchJSON(url) {
   }
 }
 
+
 export async function fetchGithubData(username) {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`);
@@ -82,6 +85,7 @@ export async function fetchGithubData(username) {
     return null;
   }
 }
+
 
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {

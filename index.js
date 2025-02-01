@@ -2,15 +2,11 @@ import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
 
 (async function () {
   const projects = await fetchJSON('./lib/projects.json');
-
   if (projects.length > 0) {
-    const latestProjects = projects.slice(0, 3);
+    const latestProjects = projects.slice(0, 3); 
     const projectsContainer = document.querySelector('.projects');
-
     if (projectsContainer) {
       renderProjects(latestProjects, projectsContainer, 'h2');
-    } else {
-      console.error("Projects container not found.");
     }
   } else {
     console.error("No projects found.");
@@ -18,7 +14,6 @@ import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
 
   const githubUsername = "NyxNmE"; 
   const githubData = await fetchGithubData(githubUsername);
-
   if (githubData) {
     const githubContainer = document.querySelector('.github-profile');
     if (githubContainer) {
