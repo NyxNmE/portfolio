@@ -33,16 +33,17 @@ pages.forEach(p => {
   nav.appendChild(a);
 });
 
-document.body.insertAdjacentHTML('beforeend', `
-  <label class="color-scheme">
-    Theme:
-    <select id="theme-switcher">
-      <option value="light dark" selected>Automatic</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </label>
-`);
+const themeLabel = document.createElement("label");
+themeLabel.classList.add("color-scheme");
+themeLabel.innerHTML = `
+  Theme:
+  <select id="theme-switcher">
+    <option value="light dark" selected>Automatic</option>
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+`;
+nav.appendChild(themeLabel);
 
 const themeSwitcher = document.getElementById("theme-switcher");
 themeSwitcher.addEventListener("change", (event) => {
@@ -88,7 +89,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     return;
   }
 
-  containerElement.innerHTML = ''; 
+  containerElement.innerHTML = '';
 
   if (!Array.isArray(projects) || projects.length === 0) {
     containerElement.innerHTML = `<p>No projects found.</p>`;
@@ -97,13 +98,11 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
   projects.forEach((project) => {
     const article = document.createElement('article');
-
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <img src="${project.image}" alt="${project.title}">
       <p>${project.description}</p>
     `;
-
     containerElement.appendChild(article);
   });
 
