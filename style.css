@@ -141,6 +141,13 @@ form button {
   line-height: 1.4;
 }
 
+
+#projects-pie-plot {
+  max-width: 20em; 
+  margin-block: 2em; 
+  overflow: visible; 
+}
+
 .project-year {
   font-style: italic;
   color: gray;
