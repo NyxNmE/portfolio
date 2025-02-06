@@ -1,10 +1,8 @@
 console.log("IT'S ALIVE!");
 
-
 export function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
-
 
 const pages = [
   { url: "/portfolio/index.html", title: "Home" },
@@ -33,7 +31,6 @@ pages.forEach(page => {
   nav.appendChild(a);
 });
 
-
 const themeLabel = document.createElement("label");
 themeLabel.classList.add("color-scheme");
 themeLabel.innerHTML = `
@@ -58,7 +55,6 @@ if (savedTheme) {
   document.documentElement.style.colorScheme = savedTheme;
 }
 
-
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
@@ -72,7 +68,6 @@ export async function fetchJSON(url) {
   }
 }
 
-
 export async function fetchGithubData(username) {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`);
@@ -85,7 +80,6 @@ export async function fetchGithubData(username) {
     return null;
   }
 }
-
 
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {
@@ -106,6 +100,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       <${headingLevel}>${project.title}</${headingLevel}>
       <img src="${project.image}" alt="${project.title}">
       <p>${project.description}</p>
+      <p class="project-year"><em>c. ${project.year}</em></p>
     `;
     containerElement.appendChild(article);
   });

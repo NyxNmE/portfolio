@@ -1,5 +1,23 @@
 [
     {
+        "title": "Project One",
+        "image": "images/bruce.jpg",
+        "description": "Description for project one.",
+        "year": "2024"
+    },
+    {
+        "title": "Project Two",
+        "image": "images/bruce.jpg",
+        "description": "Description for project two.",
+        "year": "2023"
+    },
+    {
+        "title": "Project Three",
+        "image": "images/bruce.jpg",
+        "description": "Description for project three.",
+        "year": "2022"
+    },
+    {
         "title": "Lorem ipsum dolor sit.",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, dolore. Laudantium ipsum nihil dicta ullam ab nesciunt eius officia accusamus commodi, soluta dolorum cupiditate necessitatibus nam dolore! Blanditiis, rem voluptas!"
