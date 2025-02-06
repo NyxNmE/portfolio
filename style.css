@@ -147,9 +147,10 @@ form button {
   overflow: visible;
 }
 
+
 #projects-pie-plot path {
-  stroke: black;  
-  stroke-width: 1px; 
+  stroke: black; 
+  stroke-width: 1px;
 }
 
 .project-year {
