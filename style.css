@@ -63,6 +63,7 @@ nav a.current::after {
   border-radius: 5px;
   font-size: 0.9rem;
 }
+
 .color-scheme select {
   background-color: Canvas;
   color: CanvasText;
@@ -95,6 +96,7 @@ form label {
   text-align: right;
   font-weight: bold;
 }
+
 form input, form textarea {
   width: 100%;
   box-sizing: border-box;
@@ -103,6 +105,7 @@ form input, form textarea {
   color: CanvasText;
   border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
 }
+
 form button {
   grid-column: 1 / -1; 
   justify-self: start;  
@@ -119,23 +122,27 @@ form button {
   max-width: 80rem; 
   padding: 0 1em;
 }
+
 .projects article {
   background-color: Canvas;
   color: CanvasText;
   padding: 1em;
   border-radius: 0.5em;
 }
+
 .projects article img {
   width: 100%;
   height: auto;
   display: block;
   margin: 1em 0;
 }
+
 .projects article h2 {
   margin: 0 0 0.5em;
   font-size: 1.25rem;
   line-height: 1.2;
 }
+
 .projects article p {
   margin: 0;
   line-height: 1.4;
@@ -160,24 +167,34 @@ form button {
 }
 
 .pie-legend {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  align-items: center;
   margin: 2em auto;
-  max-width: 20em;
-  font-size: 1rem;
+  max-width: 30rem;
+  padding: 1em;
+  background: color-mix(in oklch, Canvas, transparent 10%);
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
 }
 
-.pie-legend div {
+.pie-legend li {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin-bottom: 0.5em;
+  font-size: 1rem;
+  padding: 0.5em;
 }
 
-.pie-legend span {
+.pie-legend .swatch {
   width: 1em;
   height: 1em;
   display: inline-block;
   border-radius: 50%;
+}
+
+.pie-legend li {
+  list-style: none;
 }
