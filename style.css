@@ -141,11 +141,15 @@ form button {
   line-height: 1.4;
 }
 
-
 #projects-pie-plot {
-  max-width: 20em; 
-  margin-block: 2em; 
-  overflow: visible; 
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+#projects-pie-plot path {
+  stroke: black;  
+  stroke-width: 1px; 
 }
 
 .project-year {
