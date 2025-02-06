@@ -17,9 +17,16 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
   const svg = d3.select('#projects-pie-plot');
 
-  let data = [1, 2, 3, 4, 5, 5]; 
+  let data = [
+    { value: 1, label: 'Apples' },
+    { value: 2, label: 'Oranges' },
+    { value: 3, label: 'Mangos' },
+    { value: 4, label: 'Pears' },
+    { value: 5, label: 'Limes' },
+    { value: 5, label: 'Cherries' }
+  ];
 
-  let sliceGenerator = d3.pie();
+  let sliceGenerator = d3.pie().value((d) => d.value);
   let arcData = sliceGenerator(data);
 
   let arcGenerator = d3.arc()
@@ -33,7 +40,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
     .enter()
     .append('path')
     .attr('d', arcGenerator)
-    .attr('fill', (d, i) => colors(i)) 
+    .attr('fill', (d, i) => colors(i))
     .attr('stroke', 'black')
     .attr('stroke-width', 1);
+
 })();

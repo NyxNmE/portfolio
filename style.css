@@ -159,50 +159,25 @@ form button {
   margin-top: 0.5em;
 }
 
-.resume-container {
-  max-width: 800px;
-  margin: 2em auto;        
-  padding: 2em;
-  background: Canvas;        
-  color: CanvasText;
-  border-radius: 0.5em; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
-}
-.resume-container h1 {
-  font-size: 2rem;
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  text-align: center;
-}
-p.contact-info {
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2em auto;
+  max-width: 20em;
   font-size: 1rem;
-  margin: 0.5em 0 1em;
-  text-align: center;
-  color: CanvasText;
 }
-.resume-container section {
-  margin-top: 2em;
-  margin-bottom: 2em;
-  border-top: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-  padding-top: 1em;
-}
-.resume-container h2 {
-  font-size: 1.3rem;
+
+.pie-legend div {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
   margin-bottom: 0.5em;
-  text-transform: uppercase;       
-  letter-spacing: 0.05em;          
-  border-bottom: 2px solid var(--color-accent);
-  display: inline-block;           
-  padding-bottom: 0.25em;
 }
-.resume-container h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.25em;
-  color: CanvasText;
-}
-.resume-container time {
-  display: block; 
-  font-size: 0.9rem;
-  color: CanvasText;
-  margin-bottom: 0.5em;
+
+.pie-legend span {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  border-radius: 50%;
 }
