@@ -1,21 +1,21 @@
 [
     {
-          "title": "Project One",
-          "image": "../images/project1.jpg",
-          "description": "Description for project one.",
-          "year": "2024"
+        "title": "Project One",
+        "image": "images/ScatterPlot1.jpg",
+        "description": "This project uses a scatter plot to analyze the relationship between sunshine hours and rainfall in six major U.S. cities. The visualization effectively reveals patterns, showing that while more sunshine generally correlates with less rain, Miami stands out as an exception with both high sunshine and rainfall. This highlights the role of regional climate variations in shaping weather patterns.",
+        "year": "2024"
     },
     {
-          "title": "Project Two",
-          "image": "../images/project2.jpg",
-          "description": "Description for project two.",
-          "year": "2023"
+        "title": "Project Two",
+        "image": "images/output.jpg",
+        "description": "This project explores how data visualization choices can impact interpretation, focusing on temperature trends in male and female mice. The earnest visualization accurately represents the data using a clear line graph, with a properly scaled y-axis, grid lines, and labeled time intervals to ensure transparency. In contrast, the deceptive visualization exaggerates differences through manipulation, demonstrating how visual distortions can mislead viewers.",
+        "year": "2023"
     },
     {
-          "title": "Project Three",
-          "image": "../images/project3.jpg",
-          "description": "Description for project three.",
-          "year": "2022"
+        "title": "Project Three",
+        "image": "images/bruce.jpg",
+        "description": "This is our dog, Bruce. We’ve started training him, and he’s full of energy! He loves walking, running, hiking, and just about any outdoor activity.",
+        "year": "2022"
     },
     {
         "title": "Lorem ipsum dolor sit.",

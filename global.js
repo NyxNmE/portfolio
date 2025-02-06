@@ -31,6 +31,30 @@ pages.forEach(page => {
   nav.appendChild(a);
 });
 
+const themeLabel = document.createElement("label");
+themeLabel.classList.add("color-scheme");
+themeLabel.innerHTML = `
+  Theme:
+  <select id="theme-switcher">
+    <option value="light dark" selected>Automatic</option>
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+`;
+nav.appendChild(themeLabel);
+
+const themeSwitcher = document.getElementById("theme-switcher");
+themeSwitcher.addEventListener("change", (event) => {
+  document.documentElement.style.colorScheme = event.target.value;
+  localStorage.setItem("preferred-theme", event.target.value);
+});
+
+const savedTheme = localStorage.getItem("preferred-theme");
+if (savedTheme) {
+  themeSwitcher.value = savedTheme;
+  document.documentElement.style.colorScheme = savedTheme;
+}
+
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
@@ -41,6 +65,19 @@ export async function fetchJSON(url) {
   } catch (error) {
     console.error("Error fetching or parsing JSON data:", error);
     return [];
+  }
+}
+
+export async function fetchGithubData(username) {
+  try {
+    const response = await fetch(`https://api.github.com/users/${username}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch GitHub data: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching GitHub API data:", error);
+    return null;
   }
 }
 
@@ -61,7 +98,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const article = document.createElement('article');
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${project.image}" alt="${project.title}" onerror="this.onerror=null; this.src='../images/default.jpg';">
+      <img src="${project.image}" alt="${project.title}">
       <p>${project.description}</p>
       <p class="project-year"><em>c. ${project.year}</em></p>
     `;
