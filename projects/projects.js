@@ -17,16 +17,23 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
   const svg = d3.select('#projects-pie-plot');
 
+  let data = [1, 2]; 
+
+  let sliceGenerator = d3.pie();
+  let arcData = sliceGenerator(data);
+
   let arcGenerator = d3.arc()
     .innerRadius(0)
     .outerRadius(50);
 
-  let arc = arcGenerator({
-    startAngle: 0,
-    endAngle: 2 * Math.PI,
-  });
+  let colors = ['gold', 'purple'];
 
-  svg.append('path')
-    .attr('d', arc)
-    .attr('fill', 'red');
+  svg.selectAll('path')
+    .data(arcData)
+    .enter()
+    .append('path')
+    .attr('d', arcGenerator)
+    .attr('fill', (d, i) => colors[i])
+    .attr('stroke', 'black')
+    .attr('stroke-width', 1);
 })();

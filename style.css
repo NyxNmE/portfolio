@@ -147,9 +147,8 @@ form button {
   overflow: visible;
 }
 
-
 #projects-pie-plot path {
-  stroke: black; 
+  stroke: black;
   stroke-width: 1px;
 }
 
