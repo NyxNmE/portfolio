@@ -148,51 +148,99 @@ form button {
   line-height: 1.4;
 }
 
-.pie-container {
-    display: flex;
-    align-items: center;
-    gap: 2em;
-    justify-content: center;
-    flex-wrap: wrap;
+.resume-container {
+    max-width: 800px;
+    margin: 2em auto;        
+    padding: 2em;
+    background: Canvas;        
+    color: CanvasText;
+    border-radius: 0.5em; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
+  }
+  .resume-container h1 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    text-align: center;
+  }
+  p.contact-info {
+    font-size: 1rem;
+    margin: 0.5em 0 1em;
+    text-align: center;
+    color: CanvasText;
+  }
+  .resume-container section {
     margin-top: 2em;
+    margin-bottom: 2em;
+    border-top: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+    padding-top: 1em;
+  }
+  .resume-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;       
+    letter-spacing: 0.05em;          
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;           
+    padding-bottom: 0.25em;
+  }
+  .resume-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25em;
+    color: CanvasText;
+  }
+  .resume-container time {
+    display: block; 
+    font-size: 0.9rem;
+    color: CanvasText;
+    margin-bottom: 0.5em;
+  }
+
+.pie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  margin: 2em auto;
+  max-width: 50rem;
 }
 
 #projects-pie-plot {
-    max-width: 20em;
-    overflow: visible;
+  max-width: 20em;
+  overflow: visible;
 }
 
 #projects-pie-plot path {
-    stroke: black;
-    stroke-width: 1px;
+  stroke: black;
+  stroke-width: 1px;
 }
 
+/* Legend Styles */
 .pie-legend {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-    gap: 1em;
-    align-items: center;
-    max-width: 30rem;
-    padding: 1em;
-    background: color-mix(in oklch, Canvas, transparent 10%);
-    border-radius: 0.5em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-    list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  align-items: center;
+  padding: 1em;
+  background: color-mix(in oklch, Canvas, transparent 10%);
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+  list-style: none;
 }
 
 .pie-legend li {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: 1rem;
-    padding: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1rem;
+  padding: 0.5em;
 }
 
 .pie-legend .swatch {
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    border-radius: 50%;
-    background-color: inherit; 
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: var(--color);
 }
