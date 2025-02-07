@@ -29,8 +29,6 @@ nav a {
     font-weight: bold;
     padding: 1em;
     transition: all 0.3s ease;
-    flex: 0;
-    text-align: center;
 }
 
 nav a:hover {
@@ -53,99 +51,6 @@ nav a.current::after {
     position: absolute;
     bottom: -8px;
     left: 0;
-}
-
-.color-scheme {
-  margin-left: auto; 
-  background-color: Canvas;
-  color: CanvasText;
-  padding: 0.5em;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.color-scheme select {
-  background-color: Canvas;
-  color: CanvasText;
-  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-  padding: 0.25em;
-  font-size: inherit;
-}
-
-img {
-    width: 400px; 
-    height: auto; 
-    display: block;
-    margin: 20px 0; 
-    border-radius: 10px; 
-}
-
-form {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1em;
-  max-width: 600px;
-  margin: 2em auto;
-  padding: 1em;
-  background-color: Canvas;
-  color: CanvasText;
-  border-radius: 4px;
-}
-
-form label {
-  text-align: right;
-  font-weight: bold;
-}
-
-form input, form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5em;
-  background-color: color-mix(in oklch, Canvas, transparent 5%);
-  color: CanvasText;
-  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-}
-
-form button {
-  grid-column: 1 / -1; 
-  justify-self: start;  
-  padding: 0.5em 1em;
-  background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
-  color: CanvasText;
-}
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 1em;
-  margin: 2em auto;
-  max-width: 80rem; 
-  padding: 0 1em;
-}
-
-.projects article {
-  background-color: Canvas;
-  color: CanvasText;
-  padding: 1em;
-  border-radius: 0.5em;
-}
-
-.projects article img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 1em 0;
-}
-
-.projects article h2 {
-  margin: 0 0 0.5em;
-  font-size: 1.25rem;
-  line-height: 1.2;
-}
-
-.projects article p {
-  margin: 0;
-  line-height: 1.4;
 }
 
 #projects-pie-plot {
@@ -186,6 +91,7 @@ form button {
   gap: 0.5em;
   font-size: 1rem;
   padding: 0.5em;
+  list-style: none;
 }
 
 .pie-legend .swatch {
@@ -193,8 +99,5 @@ form button {
   height: 1em;
   display: inline-block;
   border-radius: 50%;
-}
-
-.pie-legend li {
-  list-style: none;
+  background-color: var(--color);
 }

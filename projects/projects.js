@@ -1,5 +1,5 @@
-import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
+import { fetchJSON, renderProjects } from '../global.js';
 
 (async function () {
   const projects = await fetchJSON('../lib/projects.json');
@@ -15,8 +15,6 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
     console.error("Projects container not found.");
   }
 
-  const svg = d3.select('#projects-pie-plot');
-
   let data = [
     { value: 1, label: 'Apples' },
     { value: 2, label: 'Oranges' },
@@ -26,14 +24,14 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
     { value: 5, label: 'Cherries' }
   ];
 
-  let sliceGenerator = d3.pie().value((d) => d.value);
+  let sliceGenerator = d3.pie().value(d => d.value);
   let arcData = sliceGenerator(data);
 
-  let arcGenerator = d3.arc()
-    .innerRadius(0)
-    .outerRadius(50);
+  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  let svg = d3.select('#projects-pie-plot');
 
   svg.selectAll('path')
     .data(arcData)
@@ -43,5 +41,13 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
     .attr('fill', (d, i) => colors(i))
     .attr('stroke', 'black')
     .attr('stroke-width', 1);
+
+  let legend = d3.select('.pie-legend');
+
+  data.forEach((d, idx) => {
+    legend.append('li')
+      .attr('style', `--color:${colors(idx)}`)
+      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+  });
 
 })();
