@@ -1,48 +1,42 @@
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
-import { fetchJSON, renderProjects } from '../global.js';
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-(async function () {
-  const projects = await fetchJSON('../lib/projects.json');
-  if (!projects || projects.length === 0) {
-    console.error("No projects found.");
-    return;
-  }
+let projects = [
+  { year: "2024" },
+  { year: "2023" },
+  { year: "2023" },
+  { year: "2022" },
+  { year: "2022" },
+  { year: "2021" },
+  { year: "2021" },
+];
 
-  const projectsContainer = document.querySelector('.projects');
-  if (projectsContainer) {
-    renderProjects(projects, projectsContainer, 'h2');
-  }
+let rolledData = d3.rollups(
+  projects,
+  (v) => v.length,
+  (d) => d.year
+);
 
-  const data = [
-    { value: 1, label: 'Apples' },
-    { value: 2, label: 'Oranges' },
-    { value: 3, label: 'Mangos' },
-    { value: 4, label: 'Pears' },
-    { value: 5, label: 'Limes' },
-    { value: 5, label: 'Cherries' },
-  ];
+let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
 
-  const colors = d3.scaleOrdinal(d3.schemeTableau10);
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-  const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-  const sliceGenerator = d3.pie().value((d) => d.value);
-  const arcData = sliceGenerator(data);
+let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+let sliceGenerator = d3.pie().value((d) => d.value);
+let arcs = sliceGenerator(data);
 
-  const svg = d3.select("#projects-pie-plot");
-  svg.selectAll("path")
-    .data(arcData)
-    .enter()
-    .append("path")
-    .attr("d", arcGenerator)
-    .attr("fill", (d, i) => colors(i))
-    .attr("stroke", "black")
-    .attr("stroke-width", "1px");
+d3.select("svg")
+  .selectAll("path")
+  .data(arcs)
+  .join("path")
+  .attr("d", arcGenerator)
+  .attr("fill", (_, i) => colors(i))
+  .attr("stroke", "black")
+  .attr("stroke-width", 1);
 
-  let legend = d3.select(".pie-legend");
-  data.forEach((d, idx) => {
-    legend.append('li')
-      .attr('style', `--color:${colors(idx)}`)
-      .html(`<span class="swatch" style="background-color:${colors(idx)}"></span> ${d.label} <em>(${d.value})</em>`);
-  });
-
-})();
+let legend = d3.select(".pie-legend");
+legend
+  .selectAll("li")
+  .data(data)
+  .join("li")
+  .attr("style", (_, i) => `--color:${colors(i)}`)
+  .html((d) => `<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
