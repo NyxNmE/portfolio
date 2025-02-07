@@ -237,3 +237,25 @@ form {
   display: inline-block;
   border-radius: 50%;
 }
+
+.pie-container svg:has(path:hover) path:not(:hover) {
+    opacity: 0.5;
+  }
+  
+  #projects-pie-plot path {
+    transition: 300ms;
+    cursor: pointer; 
+  }
+  
+  .selected {
+    --color: oklch(60% 45% 0) !important; 
+  }
+  
+  .selected:is(path) {
+    fill: var(--color);
+  }
+  
+  .selected:is(li) .swatch {
+    background-color: var(--color);
+  }
+  
