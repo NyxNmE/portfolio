@@ -9,42 +9,69 @@ import { fetchJSON, renderProjects } from '../global.js';
   }
 
   const projectsContainer = document.querySelector('.projects');
-  if (projectsContainer) {
-    renderProjects(projects, projectsContainer, 'h2');
+  const searchInput = document.querySelector('.searchBar');
+
+  renderProjects(projects, projectsContainer, 'h2');
+
+  renderPieChart(projects);
+
+  searchInput.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();  // make it case-insensitive
+
+    const filteredProjects = projects.filter((proj) => {
+      let valuesString = Object.values(proj).join('\n').toLowerCase();
+      return valuesString.includes(query);
+    });
+
+    renderProjects(filteredProjects, projectsContainer, 'h2');
+
+    renderPieChart(filteredProjects);
+  });
+
+
+  
+  function renderPieChart(projectArray) {
+    const svg = d3.select("#projects-pie-plot");
+    svg.selectAll("path").remove();
+
+    const legend = d3.select(".pie-legend");
+    legend.selectAll("li").remove();
+
+    if (!projectArray || projectArray.length === 0) {
+      return;
+    }
+
+    const rolledData = d3.rollups(
+      projectArray,
+      (v) => v.length,
+      (d) => d.year
+    );
+
+    const data = rolledData.map(([year, count]) => {
+      return { value: count, label: year || "N/A" };
+    });
+
+    const colors = d3.scaleOrdinal(d3.schemeTableau10);
+    const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    const sliceGenerator = d3.pie().value((d) => d.value);
+    const arcData = sliceGenerator(data);
+
+    svg.selectAll("path")
+      .data(arcData)
+      .enter()
+      .append("path")
+      .attr("d", arcGenerator)
+      .attr("fill", (d, i) => colors(i))
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
+
+    data.forEach((d, idx) => {
+      legend.append('li')
+        .attr('style', `--color:${colors(idx)}`)
+        .html(`
+          <span class="swatch" style="background-color:${colors(idx)}"></span> 
+          ${d.label} <em>(${d.value})</em>
+        `);
+    });
   }
-
-  const rolledData = d3.rollups(
-    projects,
-    v => v.length,
-    d => d.year
-  );
-
-  const data = rolledData.map(([year, count]) => {
-    return { value: count, label: year };
-  });
-
-  const colors = d3.scaleOrdinal(d3.schemeTableau10);
-  const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-  const sliceGenerator = d3.pie().value(d => d.value);
-  const arcData = sliceGenerator(data);
-
-  const svg = d3.select("#projects-pie-plot");
-  svg.selectAll("path")
-    .data(arcData)
-    .enter()
-    .append("path")
-    .attr("d", arcGenerator)
-    .attr("fill", (d, i) => colors(i))
-    .attr("stroke", "black")
-    .attr("stroke-width", "1px");
-
-  const legend = d3.select(".pie-legend");
-  data.forEach((d, idx) => {
-    legend.append('li')
-      .attr('style', `--color:${colors(idx)}`)
-      .html(`
-        <span class="swatch" style="background-color:${colors(idx)}"></span> 
-        ${d.label} <em>(${d.value})</em>
-      `);
-  });
 })();
