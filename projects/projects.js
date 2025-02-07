@@ -11,43 +11,39 @@ import { fetchJSON, renderProjects } from '../global.js';
   const projectsContainer = document.querySelector('.projects');
   if (projectsContainer) {
     renderProjects(projects, projectsContainer, 'h2');
-  } else {
-    console.error("Projects container not found.");
   }
 
-  let data = [
+  const data = [
     { value: 1, label: 'Apples' },
     { value: 2, label: 'Oranges' },
     { value: 3, label: 'Mangos' },
     { value: 4, label: 'Pears' },
     { value: 5, label: 'Limes' },
-    { value: 5, label: 'Cherries' }
+    { value: 5, label: 'Cherries' },
   ];
 
-  let sliceGenerator = d3.pie().value(d => d.value);
-  let arcData = sliceGenerator(data);
+  const colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  const sliceGenerator = d3.pie().value((d) => d.value);
+  const arcData = sliceGenerator(data);
 
-  let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-  let svg = d3.select('#projects-pie-plot');
-
-  svg.selectAll('path')
+  const svg = d3.select("#projects-pie-plot");
+  svg.selectAll("path")
     .data(arcData)
     .enter()
-    .append('path')
-    .attr('d', arcGenerator)
-    .attr('fill', (d, i) => colors(i))
-    .attr('stroke', 'black')
-    .attr('stroke-width', 1);
+    .append("path")
+    .attr("d", arcGenerator)
+    .attr("fill", (d, i) => colors(i))
+    .attr("stroke", "black")
+    .attr("stroke-width", "1px");
 
-  let legend = d3.select('.pie-legend');
-
+  let legend = d3.select(".pie-legend");
   data.forEach((d, idx) => {
     legend.append('li')
       .attr('style', `--color:${colors(idx)}`)
-      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+      .html(`<span class="swatch" style="background-color:${colors(idx)}"></span> ${d.label} <em>(${d.value})</em>`);
   });
 
 })();
+ 

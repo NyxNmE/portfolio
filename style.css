@@ -72,48 +72,6 @@ nav a.current::after {
   font-size: inherit;
 }
 
-img {
-    width: 400px; 
-    height: auto; 
-    display: block;
-    margin: 20px 0; 
-    border-radius: 10px; 
-}
-
-form {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1em;
-  max-width: 600px;
-  margin: 2em auto;
-  padding: 1em;
-  background-color: Canvas;
-  color: CanvasText;
-  border-radius: 4px;
-}
-
-form label {
-  text-align: right;
-  font-weight: bold;
-}
-
-form input, form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5em;
-  background-color: color-mix(in oklch, Canvas, transparent 5%);
-  color: CanvasText;
-  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-}
-
-form button {
-  grid-column: 1 / -1; 
-  justify-self: start;  
-  padding: 0.5em 1em;
-  background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
-  color: CanvasText;
-}
-
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
@@ -159,13 +117,6 @@ form button {
   stroke-width: 1px;
 }
 
-.project-year {
-  font-style: italic;
-  color: gray;
-  font-size: 0.9rem;
-  margin-top: 0.5em;
-}
-
 .pie-legend {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
@@ -178,6 +129,7 @@ form button {
   border-radius: 0.5em;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+  list-style: none;
 }
 
 .pie-legend li {
@@ -193,8 +145,5 @@ form button {
   height: 1em;
   display: inline-block;
   border-radius: 50%;
-}
-
-.pie-legend li {
-  list-style: none;
+  background-color: var(--color);
 }
