@@ -12,6 +12,14 @@ body {
     color: CanvasText;
 }
 
+img {
+    width: 400px; 
+    height: auto; 
+    display: block;
+    margin: 20px 0; 
+    border-radius: 10px; 
+}
+
 nav {
     display: flex;
     justify-content: center; 
@@ -72,129 +80,121 @@ nav a.current::after {
   font-size: inherit;
 }
 
-img {
-    width: 400px; 
-    height: auto; 
-    display: block;
-    margin: 20px 0; 
-    border-radius: 10px; 
-}
-
 form {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1em;
-  max-width: 600px;
-  margin: 2em auto;
-  padding: 1em;
-  background-color: Canvas;
-  color: CanvasText;
-  border-radius: 4px;
-}
-
-form label {
-  text-align: right;
-  font-weight: bold;
-}
-
-form input, form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5em;
-  background-color: color-mix(in oklch, Canvas, transparent 5%);
-  color: CanvasText;
-  border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-}
-
-form button {
-  grid-column: 1 / -1; 
-  justify-self: start;  
-  padding: 0.5em 1em;
-  background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
-  color: CanvasText;
-}
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 1em;
-  margin: 2em auto;
-  max-width: 80rem; 
-  padding: 0 1em;
-}
-
-.projects article {
-  background-color: Canvas;
-  color: CanvasText;
-  padding: 1em;
-  border-radius: 0.5em;
-}
-
-.projects article img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 1em 0;
-}
-
-.projects article h2 {
-  margin: 0 0 0.5em;
-  font-size: 1.25rem;
-  line-height: 1.2;
-}
-
-.projects article p {
-  margin: 0;
-  line-height: 1.4;
-}
-
-.resume-container {
-    max-width: 800px;
-    margin: 2em auto;        
-    padding: 2em;
-    background: Canvas;        
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: Canvas;
     color: CanvasText;
-    border-radius: 0.5em; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
+    border-radius: 4px;
   }
-  .resume-container h1 {
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    text-align: center;
+  
+  form label {
+    text-align: right;
+    font-weight: bold;
   }
-  p.contact-info {
-    font-size: 1rem;
-    margin: 0.5em 0 1em;
-    text-align: center;
+  
+  form input, form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5em;
+    background-color: color-mix(in oklch, Canvas, transparent 5%);
+    color: CanvasText;
+    border: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+  }
+  
+  form button {
+    grid-column: 1 / -1; 
+    justify-self: start;  
+    padding: 0.5em 1em;
+    background-color: color-mix(in oklch, var(--color-accent), Canvas 85%);
     color: CanvasText;
   }
-  .resume-container section {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-top: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
-    padding-top: 1em;
+  
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em;
+    margin: 2em auto;
+    max-width: 80rem; 
+    padding: 0 1em;
   }
-  .resume-container h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;       
-    letter-spacing: 0.05em;          
-    border-bottom: 2px solid var(--color-accent);
-    display: inline-block;           
-    padding-bottom: 0.25em;
-  }
-  .resume-container h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.25em;
+  
+  .projects article {
+    background-color: Canvas;
     color: CanvasText;
+    padding: 1em;
+    border-radius: 0.5em;
   }
-  .resume-container time {
-    display: block; 
-    font-size: 0.9rem;
-    color: CanvasText;
-    margin-bottom: 0.5em;
+  
+  .projects article img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
   }
+  
+  .projects article h2 {
+    margin: 0 0 0.5em;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+  
+  .projects article p {
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .resume-container {
+      max-width: 800px;
+      margin: 2em auto;        
+      padding: 2em;
+      background: Canvas;        
+      color: CanvasText;
+      border-radius: 0.5em; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
+    }
+    .resume-container h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      text-align: center;
+    }
+    p.contact-info {
+      font-size: 1rem;
+      margin: 0.5em 0 1em;
+      text-align: center;
+      color: CanvasText;
+    }
+    .resume-container section {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      border-top: 1px solid color-mix(in oklch, CanvasText, transparent 40%);
+      padding-top: 1em;
+    }
+    .resume-container h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5em;
+      text-transform: uppercase;       
+      letter-spacing: 0.05em;          
+      border-bottom: 2px solid var(--color-accent);
+      display: inline-block;           
+      padding-bottom: 0.25em;
+    }
+    .resume-container h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25em;
+      color: CanvasText;
+    }
+    .resume-container time {
+      display: block; 
+      font-size: 0.9rem;
+      color: CanvasText;
+      margin-bottom: 0.5em;
+    }
 
 .pie-container {
   display: flex;
@@ -208,11 +208,6 @@ form button {
 #projects-pie-plot {
   max-width: 20em;
   overflow: visible;
-}
-
-#projects-pie-plot path {
-  stroke: black;
-  stroke-width: 1px;
 }
 
 .pie-legend {
@@ -241,5 +236,4 @@ form button {
   height: 1em;
   display: inline-block;
   border-radius: 50%;
-  background-color: var(--color);
 }

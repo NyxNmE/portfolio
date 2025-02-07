@@ -15,24 +15,17 @@ import { fetchJSON, renderProjects } from '../global.js';
 
   const rolledData = d3.rollups(
     projects,
-    v => v.length,    
-    d => d.year       
+    v => v.length,
+    d => d.year
   );
 
-  const data = rolledData.map(([year, count]) => ({
-    value: count,
-    label: year
-  }));
+  const data = rolledData.map(([year, count]) => {
+    return { value: count, label: year };
+  });
 
   const colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-  const arcGenerator = d3.arc()
-    .innerRadius(0)
-    .outerRadius(50);
-
-  const sliceGenerator = d3.pie()
-    .value(d => d.value);
-
+  const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  const sliceGenerator = d3.pie().value(d => d.value);
   const arcData = sliceGenerator(data);
 
   const svg = d3.select("#projects-pie-plot");
@@ -45,12 +38,12 @@ import { fetchJSON, renderProjects } from '../global.js';
     .attr("stroke", "black")
     .attr("stroke-width", "1px");
 
-  let legend = d3.select(".pie-legend");
+  const legend = d3.select(".pie-legend");
   data.forEach((d, idx) => {
     legend.append('li')
       .attr('style', `--color:${colors(idx)}`)
       .html(`
-        <span class="swatch" style="background-color:${colors(idx)}"></span>
+        <span class="swatch" style="background-color:${colors(idx)}"></span> 
         ${d.label} <em>(${d.value})</em>
       `);
   });

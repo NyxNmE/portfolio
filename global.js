@@ -5,11 +5,11 @@ export function $$(selector, context = document) {
 }
 
 const pages = [
-  { url: "/portfolio/index.html", title: "Home" },
+  { url: "/portfolio/index.html",      title: "Home" },
   { url: "/portfolio/projects/index.html", title: "Projects" },
-  { url: "/portfolio/contact/index.html", title: "Contact" },
-  { url: "/portfolio/resume/index.html", title: "Resume" },
-  { url: "https://github.com/NyxNmE", title: "GitHub" }
+  { url: "/portfolio/contact/index.html",  title: "Contact" },
+  { url: "/portfolio/resume/index.html",   title: "Resume" },
+  { url: "https://github.com/NyxNmE",      title: "GitHub" }
 ];
 
 const nav = document.createElement("nav");
@@ -23,7 +23,6 @@ pages.forEach(page => {
   if (page.url.startsWith("http")) {
     a.target = "_blank";
   }
-
   if (window.location.pathname === page.url) {
     a.classList.add("current");
   }
@@ -96,11 +95,16 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
   projects.forEach((project) => {
     const article = document.createElement('article');
+    
+    const imageHTML = project.image
+      ? `<img src="${project.image}" alt="${project.title}">`
+      : '';
+
     article.innerHTML = `
-      <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
-      <p class="project-year"><em>c. ${project.year}</em></p>
+      <${headingLevel}>${project.title || "Untitled Project"}</${headingLevel}>
+      ${imageHTML}
+      <p>${project.description || ""}</p>
+      <p class="project-year"><em>c. ${project.year || "N/A"}</em></p>
     `;
     containerElement.appendChild(article);
   });
