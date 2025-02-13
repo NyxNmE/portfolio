@@ -5,11 +5,12 @@ export function $$(selector, context = document) {
 }
 
 const pages = [
-  { url: "/portfolio/index.html",      title: "Home" },
-  { url: "/portfolio/projects/index.html", title: "Projects" },
-  { url: "/portfolio/contact/index.html",  title: "Contact" },
-  { url: "/portfolio/resume/index.html",   title: "Resume" },
-  { url: "https://github.com/NyxNmE",      title: "GitHub" }
+  { url: "/portfolio/index.html",             title: "Home" },
+  { url: "/portfolio/projects/index.html",    title: "Projects" },
+  { url: "/portfolio/contact/index.html",     title: "Contact" },
+  { url: "/portfolio/resume/index.html",      title: "Resume" },
+  { url: "/portfolio/meta/index.html",        title: "Meta" },   
+  { url: "https://github.com/NyxNmE",         title: "GitHub" }
 ];
 
 const nav = document.createElement("nav");

@@ -258,4 +258,3 @@ form {
   .selected:is(li) .swatch {
     background-color: var(--color);
   }
-  

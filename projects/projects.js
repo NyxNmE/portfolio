@@ -18,9 +18,7 @@ import { fetchJSON, renderProjects } from '../global.js';
   
   function renderEverything() {
     let filtered = getFilteredProjects(); 
-
     renderProjects(filtered, projectsContainer, 'h2');
-
     drawPie(filtered);
   }
 
@@ -30,7 +28,6 @@ import { fetchJSON, renderProjects } from '../global.js';
       let joinedValues = Object.values(proj).join('\n').toLowerCase();
       return joinedValues.includes(query);
     });
-
 
     if (selectedIndex < 0) {
       return base;
@@ -84,7 +81,7 @@ import { fetchJSON, renderProjects } from '../global.js';
         renderEverything();
       });
 
-    let li = legend.selectAll("li")
+    legend.selectAll("li")
       .data(arcData)
       .enter()
       .append("li")
@@ -101,7 +98,6 @@ import { fetchJSON, renderProjects } from '../global.js';
         renderEverything();
       });
 
-    
     svg.selectAll("path")
       .attr("class", (_, i) => i === selectedIndex ? 'selected' : '');
 
@@ -109,12 +105,9 @@ import { fetchJSON, renderProjects } from '../global.js';
       .attr("class", (_, i) => i === selectedIndex ? 'selected' : '');
   }
 
-  
   searchInput.addEventListener('input', () => {
-    
     renderEverything();
   });
 
-  
   renderEverything();
 })();
