@@ -3,7 +3,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 let data = [];
 
 async function loadData() {
-  data = await d3.csv('./loc.csv');
+  data = await d3.csv('loc.csv');
   console.log("Loaded LOC data:", data);
 
   let totalLines = 0;
