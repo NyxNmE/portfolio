@@ -8,3 +8,4 @@ async function loadData() {
 document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
 });
+console.log('hello')
