@@ -258,3 +258,49 @@ form {
   .selected:is(li) .swatch {
     background-color: var(--color);
   }
+
+
+  .stats {
+    display: grid;
+    grid-auto-flow: column;  
+    gap: 3rem;
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 0;
+  }
+  
+  .stats > div {
+    text-align: center;
+  }
+  
+  .stats dt {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+  }
+  
+  .stats dd {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    color: #000; 
+  }
+  
+  .stats,
+  .stats dt,
+  .stats dd {
+    margin: 0;
+    padding: 0;
+  }
+
+  .gridlines .domain {
+    stroke: none; 
+  }
+  
+  .gridlines .tick line {
+    stroke: #999;
+    stroke-dasharray: 2,2; 
+    opacity: 0.3;
+  }
+  
