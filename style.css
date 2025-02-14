@@ -304,3 +304,88 @@ form {
     opacity: 0.3;
   }
   
+  
+dl.tooltip {
+    position: absolute; 
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 0.25em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    pointer-events: none;
+    padding: 1em;
+    z-index: 9999;
+  
+    transition-duration: 300ms;
+    transition-property: opacity, visibility;
+  }
+  
+  dl.tooltip[hidden]:not(:hover, :focus-within) {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  dl.info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25em 1rem;
+  }
+  
+  circle {
+    transition: transform 0.2s;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  circle:hover {
+    transform: scale(1.5);
+  }
+
+  
+
+.gridlines .domain {
+    stroke: none;
+  }
+  .gridlines .tick line {
+    stroke: #999;
+    opacity: 0.3;
+  }
+  
+  
+  @keyframes marching-ants {
+    to {
+      stroke-dashoffset: -8; 
+    }
+  }
+  
+  .selection {
+    fill-opacity: 0.1;       
+    stroke: black;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 5 3;   
+    animation: marching-ants 2s linear infinite; 
+  }
+
+  circle.selected {
+    fill: #ff6b6b; 
+    stroke: black;
+    stroke-width: 1px;
+  }
+  
+dl.stats {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5em 1em;
+    margin: 1em 0;
+  }
+  
+  #chart svg {
+    max-width: 700px;
+    height: auto;
+    display: block;     
+    margin: 0 auto;
+  }
+  
+  circle.selected {
+    fill: #ff6b6b;
+    stroke: black;
+    stroke-width: 1px;
+  }
+  
