@@ -76,7 +76,7 @@ import { fetchJSON, renderProjects } from '../global.js';
       .attr("stroke", "black")
       .attr("stroke-width", "1px")
       .on("click", (event, dArc) => {
-        let i = dArc.index; // which wedge is this?
+        let i = dArc.index; 
         selectedIndex = (selectedIndex === i) ? -1 : i;
         renderEverything();
       });
